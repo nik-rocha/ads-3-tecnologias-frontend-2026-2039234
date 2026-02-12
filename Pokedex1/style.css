@@ -13,11 +13,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
-.card-pokemon {
-    width: 30%;
-    height: 80%;
+.card-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 40px;
+}
+
+.card-pokemon { 
+    width: 15%;
+    height: 400px;
     padding: 30px;
     background-color: #f4f4f4;
     border-radius: 20px;
