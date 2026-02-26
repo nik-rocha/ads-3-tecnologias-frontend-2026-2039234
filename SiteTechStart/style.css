@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+header {
+    background-color: #ff7900;
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1% 0 1%;
+    color: #f4f4f4;
+    
+    h1 {
+        font-size: 1.7vw;
+        transition: transform 0.2s;
+        
+        &:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+    }
+
+    .header-navs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2vw;
+        
+        h2 {
+            font-weight: 500;
+            font-size: 1vw;
+            transition: transform 0.2s;
+
+            &:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+main {
+
+    .top-content {
+        background-color: #ffce1b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7% 0 7% 0;
+        gap: 5%;
+        color: #1d2530;
+
+        .content-title {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 25%;
+            gap: 2vh;
+
+            h1 {
+                font-size: 250%;
+            }
+            
+            button {
+                background-color: #1d2530;
+                border: none;
+                width: 140px;
+                height: 40px;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 90%;
+                color: #ffce1b;
+                transition: transform 0.2s;
+
+                &:hover {
+                    transform: scale(1.05);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        img {
+            width: 25%;
+            border-radius: 10px;
+            transition: transform 0.2s;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    .bottom-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        h1 {
+            margin: 5% 0 5% 0;
+        }
+
+        .table-container {
+            width: 80%;
+            gap: 20%;
+
+            .main-table {
+                    display: grid;
+                    grid-template-columns: 25% 25% 25% 25% 25%;
+                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                    gap: 2%;
+                    justify-content: center;
+                    margin-bottom: 2%;
+
+                    .table-card {
+                        display: flex;
+                        flex-direction: column;
+                        padding: 5% 10% 5% 10%;
+                        box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.20);
+                        border-radius: 20px;
+                        transition: transform 0.2s;
+
+                        &:hover {
+                            transform: scale(1.05);
+                        }
+
+                        h1 {
+                            color: #ffce1b;
+                            font-size: 1.3vw;
+                        }
+
+                        p {
+                            font-size: 90%;
+                            margin-bottom: 5%;
+                        }
+
+                        button {
+                            border: 2px solid #ffce1b;
+                            border-radius: 50px;
+                            width: 50%;
+                            height: 5vh;
+                            background-color: #fff;
+                            color: #ffce1b;
+                            font-size: 1rem;
+                            font-weight: 700;
+                            transition: transform 0.2s;
+
+                            &:hover {
+                                transform: scale(1.05);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+            }
+
+            #bottom {
+                    grid-template-columns: 25% 25% 25% 25%;
+                    grid-template-columns: 1fr 1fr;
+
+                    #bottom-card {
+                        padding: 2% 5% 2% 5%
+                    }
+            }
+        }
+    }
+}
