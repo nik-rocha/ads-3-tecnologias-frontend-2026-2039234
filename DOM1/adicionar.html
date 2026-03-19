@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar com DOM</title>
+</head>
+<body>
+    <input type="text" id="campo" placeholder="Digite algo">
+    <button id="botao">Exibir valor</button>
+    <p id="conteudo"></p>
+</body>
+<script>
+    let botao = document.getElementById("botao")
+    let campo = document.getElementById("campo")
+    let conteudo = document.getElementById("conteudo")
+    console.log(conteudo)
+
+    botao.addEventListener("click", function() {
+        console.log(campo.value)
+        conteudo.textContent = `Você digitou ${campo.value}`
+        conteudo.style.backgroundColor = "yellow" 
+    })
+</script>
+</html>
