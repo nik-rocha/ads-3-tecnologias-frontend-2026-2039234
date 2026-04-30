@@ -2,6 +2,7 @@
 </script>
 
 <template>
+    <!-- Carla que fez abaixo! -->
     <main>
         <img src="../assets/cachorrochupetao.jpg" alt="" width="400px" height="200px">
         <h1>Cachorro Chupetão</h1>
