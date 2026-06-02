@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="config.js"></script>
+    <title>Document</title>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Hortifruti</h3>
+                <form id="formulario">
+                    <div class="mb-3">
+                        <label class="form-label" for="nome">Nome Produto</label>
+                        <input id="nome" class="form-control" type="text" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="preco">Preço</label>
+                        <input id="preco" class="form-control" type="number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="quantidade">Quantidade</label>
+                        <input id="quantidade" class="form-control" type="number" required  >
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Criar Produto
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body mb-3">
+                <h3 class="card-title">Listagem</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>ID</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo_tabela">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    const BASE_URL = `https://api.restful-api.dev/collections/${CONFIG.COLLECTION}/objects`
+
+    const api = axios.create({
+        baseURL: BASE_URL,
+        headers: {
+            "x-api-key": CONFIG.TOKEN,
+            "Content-Type": "application/json"
+        }
+    })
+
+    let formulario = document.getElementById("formulario")
+    let botao = document.getElementById("botao")
+    let editando_id = null
+
+    formulario.addEventListener("submit", async (e) => {
+        e.preventDefault()
+        console.log("TESTE")
+
+        let nome = document.getElementById("nome").value
+        let preco = document.getElementById("preco").value
+        let quantidade = document.getElementById("quantidade").value
+
+        let corpo = {
+            name: nome,
+            data: {
+                price: preco,
+                quantity: quantidade
+            }
+        }
+
+        try {
+            if (editando_id) {
+                let resposta = await api.put(editando_id, corpo)
+                alert(`Produto editado com sucesso: ${resposta.data.id}`)
+            } else {
+                let resposta = await api.post("", corpo)
+                alert(`Produto criado com sucesso: ${resposta.data.id}`)
+            }
+            //Esvaziar o formulário para edição
+            formulario.reset()
+            carregarProdutos()
+        } catch (erro) {
+            console.log(erro)
+            alert(`Erro: ${erro.response.data}`)
+        }
+    })
+
+    async function carregarProdutos() {
+        let corpo_tabela = document.getElementById("corpo_tabela")
+        corpo_tabela.innerHTML = ""
+
+        try {
+            let resposta = await api.get("")
+            let produtos = resposta.data
+            produtos.forEach(produto => {
+                let linha = `
+                    <tr>
+                        <td>${produto.name}</td>
+                        <td>${produto.data.price}</td>
+                        <td>${produto.data.quantity}</td>
+                        <td>${produto.id}</td>
+                        <td>
+                            <button
+                            onclick='editarProduto(${JNSON.stringify(produto)})' class="btn btn-sm btn-warning">
+                                Editar
+                            </button>
+                            <button 
+                            onclick="excluirProduto(${produto.id})"
+                            class="btn btn-sm btn-danger">
+                                Excluir
+                            </button>
+                        </td>    
+                    </tr>
+                `
+                corpo_tabela.insertAdjacentHTML("beforebegin", linha)
+            })
+            console.log(resposta)
+        } catch (erro) {
+            console.log(erro)
+            alert(`Erro: ${erro.response.data}`)
+        }
+    }
+
+    async function excluirProduto(id) {
+        if (confirm("Tem certeza que deseja excluir?")) {
+            try {
+                await api.delete("/id")
+            } catch(erro) {
+                alert(`Erro: ${erro.response.data}`)
+            }
+        }
+    }
+
+    function editarProduto(produto) {
+        document.getElementById("nome").value = produto.name
+        document.getElementById("preco").value = produto.data.price
+        document.getElementById("quantidade").value = produto.data.quantity
+        editando_id = produto.id
+        botao.textContent = "Editar Produto"
+        botao.classList.remove("btn-primary")
+        botao.classList.add("btn-warning")
+
+        window.scrollTo({top: 0, behavior: "smooth"})
+        console.log(produto)
+    }
+
+    //carregarProdutos()
+</script>

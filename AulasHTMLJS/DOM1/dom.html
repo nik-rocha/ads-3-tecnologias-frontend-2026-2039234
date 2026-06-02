@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prática DOM</title>
+</head>
+<body>
+    <h1 id="titulo">Olá Mundo!</h1>
+    <h1 class="estilo_titulo">Olá Mundo!</h1>
+    <h1 class="estilo_titulo">Texto 1</h1>
+    <h1 class="estilo_titulo">Texto 2</h1>
+    <h1 class="estilo_titulo">Texto 3</h1>
+</body>
+<script>
+    console.log("Olá")
+
+    // Seleciona pelo ID
+    let titulo = document.getElementById("titulo")
+    console.log(titulo)
+    console.log(titulo.textContent)
+    titulo.textContent = "Texto Alterado"
+
+    //let titulo2 = document.getElementsByClassName("estilo_titulo")
+    //console.log(titulo2)
+    //console.log(titulo2[0])
+    //console.log(titulo2[0].textContent)
+
+    let titulos_tag = document.querySelectorAll(".estilo_titulo")
+    console.log(titulos_tag[0].textContent)
+
+    for (let i = 0; i < titulos_tag.length; i++) {
+        console.log(i)
+        console.log(titulos_tag[i].textContent)
+    }
+</script>
+</html>
