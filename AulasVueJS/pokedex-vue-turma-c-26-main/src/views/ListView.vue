@@ -22,8 +22,8 @@ export default {
     },
     computed: {
         pokemonsFiltrados() {
-            return this.busca 
-            ? this.pokemons.filter(p => p.name.includes(this.busca.toLowerCase())) 
+            return this.busca
+            ? this.pokemons.filter(p => p.name.includes(this.busca.toLowerCase()))
             : this.pokemons
         }
     },
